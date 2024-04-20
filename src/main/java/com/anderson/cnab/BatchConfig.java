@@ -57,26 +57,11 @@ public class BatchConfig {
     FlatFileItemReader<TransacaoCNAB> reader() {
         return new FlatFileItemReaderBuilder<TransacaoCNAB>()
                 .name("reader")
-                .resource(new FileSystemResource("Cfiles/CNAB.txt"))
+                .resource(new FileSystemResource("files/CNAB.txt"))
                 .fixedLength()
-                .columns(
-                        new Range(1, 1),   // Tipo
-                        new Range(2, 9),   // Data
-                        new Range(10, 19), // Valor
-                        new Range(20, 30), // CPF
-                        new Range(31, 42), // Cartão
-                        new Range(43, 48), // Hora
-                        new Range(49, 62), // Dono da loja
-                        new Range(63, 81)  // Nome loja
-                )
-                .names("tipo",
-                        "data",
-                        "valor",
-                        "cpf",
-                        "cartao",
-                        "hora",
-                        "donoDaLoja",
-                        "nomeLoja")
+                .columns(new Range(1, 1), new Range(2, 9), new Range(10, 19), new Range(20, 30),
+                        new Range(31, 42), new Range(43, 48), new Range(49, 62), new Range(63, 80))
+                .names("tipo", "data", "valor", "cpf", "cartao", "hora", "donoDaLoja", "nomeDaLoja")
                 .targetType(TransacaoCNAB.class)
                 .build();
 
@@ -102,9 +87,9 @@ public class BatchConfig {
                 .dataSource(dataSource)
                 .sql("""
                         INSERT INTO
-                            transacao (id, tipo, data, valor, cpf, cartao, hora, dono_da_loja, nome_da_loja)
+                            transacao (tipo, data, valor, cpf, cartao, hora, dono_da_loja, nome_da_loja)
                         VALUES
-                            (:id, :tipo, :data, :valor, :cpf, :cartao, :hora, :donoDaLoja, :nomeLoja)
+                            (:tipo, :data, :valor, :cpf, :cartao, :hora, :donoDaLoja, :nomeDaLoja)
                      """
                 ).beanMapped().build();
     }
