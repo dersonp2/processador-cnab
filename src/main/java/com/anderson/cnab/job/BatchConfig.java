@@ -1,7 +1,7 @@
 package com.anderson.cnab.job;
 
-import com.anderson.cnab.domain.Transacao;
-import com.anderson.cnab.domain.TransacaoCNAB;
+import com.anderson.cnab.entity.Transacao;
+import com.anderson.cnab.entity.TransacaoCNAB;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.StepScope;
@@ -22,7 +22,6 @@ import org.springframework.batch.item.file.transform.Range;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 import org.springframework.core.task.SimpleAsyncTaskExecutor;
 import org.springframework.transaction.PlatformTransactionManager;

@@ -1,4 +1,4 @@
-package com.anderson.cnab.domain;
+package com.anderson.cnab.service;
 
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.JobParameters;
@@ -38,7 +38,7 @@ public class CnabService {
 
         var jobParameters = new JobParametersBuilder()
                 .addJobParameter("cnab", file.getOriginalFilename(), String.class, true)
-                .addJobParameter("cnabFile", "file:"+targetLocation.toString(), String.class)
+                .addJobParameter("cnabFile", "file:"+targetLocation.toString(), String.class, false)
                         .toJobParameters();
 
         jobLauncher.run(job,jobParameters);
