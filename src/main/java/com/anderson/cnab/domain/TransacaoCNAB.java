@@ -1,4 +1,4 @@
-package com.anderson.cnab;
+package com.anderson.cnab.domain;
 
 import java.math.BigDecimal;
 
