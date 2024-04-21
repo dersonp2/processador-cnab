@@ -20,7 +20,7 @@ public class CnabController {
     }
 
     @PostMapping("upload")
-    public String upload(@RequestParam MultipartFile file) throws IOException {
+    public String upload(@RequestParam MultipartFile file) throws Exception {
         cnabService.uploadCnabFile(file);
         return "Processamento iniciado";
     }
