@@ -1,5 +1,6 @@
 package com.anderson.cnab.job;
 
+import com.anderson.cnab.entity.TipoTransacao;
 import com.anderson.cnab.entity.Transacao;
 import com.anderson.cnab.entity.TransacaoCNAB;
 import org.springframework.batch.core.Job;
@@ -78,8 +79,13 @@ public class BatchConfig {
     @Bean
     ItemProcessor<TransacaoCNAB, Transacao> processor() {
         return item -> {
+            var tipoTransacao = TipoTransacao.findByTipo(item.tipo());
+            BigDecimal valorNormalizado = item.valor()
+                            .divide(BigDecimal.valueOf(100))
+                            .multiply(tipoTransacao.getSinal());
+
             return new Transacao(
-                    null, item.tipo(), null, item.valor().divide(BigDecimal.valueOf(100)), item.cpf(),
+                    null, item.tipo(), null, valorNormalizado, item.cpf(),
                     item.cartao(), null, item.donoDaLoja().trim(),
                     item.nomeDaLoja().trim())
                     .withData(item.data())
